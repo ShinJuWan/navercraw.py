@@ -9,32 +9,24 @@
 </head>
 <body>
     <h1>네이버 뉴스 수집 데이터 모니터링</h1>
-    </hr>
+    </br>
     <div id="news-box">
 
     </div>
     <script>
-        const eventSource = new EventSource("http://localhost:8080/news");
+        const eventSource = new EventSource("http://localhost:8080/naverNews")
         eventSource.onmessage = (event) => {
-            //console.log(event.data);
-            naverNews = JSON.parse(event.data);
-            console.log(naverNews);
+           //console.log(event.data);
 
-            $("#news-box").append("<h3>"+naverNews.title+"</h3>");
+           naverNews = JSON.parse(event.data);
+           console.log(naverNews);
 
-            if(naverNews.title === "검정"){
-                $("body").css("background-color", "black");
-            }else if(naverNews.title === "빨강"){
-                $("body").css("background-color", "red");
-            }else if(naverNews.title === "노랑"){
-                $("body").css("background-color", "yellow");
-            }else if(naverNews.title === "초록"){
-                $("body").css("background-color", "green");
-            }else if(naverNews.title === "하얀"){
-                $("body").css("background-color", "white");
-            }
+           $("#news-box").append("<h3>" + naverNews.title + "</h3>");
+           $("#news-box").append("<h3>" + naverNews.createdAt + "</h3>");
+           $("#news-box").append("<h3>" + naverNews.company + "</h3>");
+
 
         }
-    </script>    
+    </script>
 </body>
 </html>
